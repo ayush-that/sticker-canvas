@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" fill="none">
+  <!-- Laptop Body -->
+  <rect x="50" y="30" width="700" height="440" rx="20" fill="#2a2a2a"/>
+  <rect x="60" y="40" width="680" height="420" rx="15" fill="#1a1a1a"/>
+
+  <!-- Screen bezel -->
+  <rect x="70" y="50" width="660" height="380" rx="8" fill="#0d0d0d"/>
+
+  <!-- Screen -->
+  <rect x="85" y="65" width="630" height="350" rx="4" fill="#1e1e1e"/>
+
+  <!-- Camera notch -->
+  <rect x="370" y="50" width="60" height="15" rx="4" fill="#0d0d0d"/>
+  <circle cx="400" cy="57" r="3" fill="#2a2a2a"/>
+
+  <!-- Keyboard area (top-down lid view - closed) -->
+  <rect x="50" y="470" width="700" height="50" rx="8" fill="#3a3a3a"/>
+
+  <!-- Apple logo hint -->
+  <ellipse cx="400" cy="250" rx="35" ry="42" fill="#3a3a3a" opacity="0.3"/>
+
+  <!-- Subtle reflection -->
+  <rect x="85" y="65" width="630" height="175" rx="4" fill="url(#reflection)" opacity="0.1"/>
+
+  <defs>
+    <linearGradient id="reflection" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
