@@ -1,60 +1,44 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 const useCanvasStore = create(
   devtools(
     persist(
       (set, get) => ({
-        // Laptop State
         laptop: {
-          id: 'macbook-pro-14',
-          src: '/laptops/macbook-pro-14.svg',
+          id: "macbook-pro-14",
+          src: "/laptops/macbook-pro-14.svg",
           isCustom: false,
           opacity: 1,
         },
-
-        // Stickers State
         stickers: [],
         selectedStickerIds: [],
-
-        // Sticker Library (imported but not on canvas)
         stickerLibrary: [],
-
-        // UI State
         zoom: 1,
         panOffset: { x: 0, y: 0 },
         showGrid: false,
         snapEnabled: true,
-        activeTool: 'select', // 'select' | 'pan'
-
-        // Panel visibility
+        activeTool: "select",
         showLaptopSelector: false,
         showStickerLibrary: false,
         showExportPanel: false,
         showStickerControls: false,
-
-        // Processing State
-        processingQueue: [], // Sticker IDs being processed
-
-        // Notifications
+        processingQueue: [],
         notifications: [],
-
-        // History (Undo/Redo)
         history: [],
         historyIndex: -1,
         maxHistory: 50,
 
-        // Actions - Laptop
         setLaptop: (laptop) => {
           get().pushToHistory();
           set({ laptop });
         },
 
-        setLaptopOpacity: (opacity) => set((state) => ({
-          laptop: { ...state.laptop, opacity }
-        })),
+        setLaptopOpacity: (opacity) =>
+          set((state) => ({
+            laptop: { ...state.laptop, opacity },
+          })),
 
-        // Actions - Stickers
         addSticker: (sticker) => {
           get().pushToHistory();
           set((state) => ({
@@ -62,24 +46,27 @@ const useCanvasStore = create(
           }));
         },
 
-        addToLibrary: (sticker) => set((state) => ({
-          stickerLibrary: [...state.stickerLibrary, sticker],
-        })),
+        addToLibrary: (sticker) =>
+          set((state) => ({
+            stickerLibrary: [...state.stickerLibrary, sticker],
+          })),
 
-        removeFromLibrary: (id) => set((state) => ({
-          stickerLibrary: state.stickerLibrary.filter((s) => s.id !== id),
-        })),
+        removeFromLibrary: (id) =>
+          set((state) => ({
+            stickerLibrary: state.stickerLibrary.filter((s) => s.id !== id),
+          })),
 
-        updateLibrarySticker: (id, updates) => set((state) => ({
-          stickerLibrary: state.stickerLibrary.map((s) =>
-            s.id === id ? { ...s, ...updates } : s
-          ),
-        })),
+        updateLibrarySticker: (id, updates) =>
+          set((state) => ({
+            stickerLibrary: state.stickerLibrary.map((s) =>
+              s.id === id ? { ...s, ...updates } : s,
+            ),
+          })),
 
         updateSticker: (id, updates) => {
           set((state) => ({
             stickers: state.stickers.map((s) =>
-              s.id === id ? { ...s, ...updates } : s
+              s.id === id ? { ...s, ...updates } : s,
             ),
           }));
         },
@@ -88,7 +75,7 @@ const useCanvasStore = create(
           get().pushToHistory();
           set((state) => ({
             stickers: state.stickers.map((s) =>
-              s.id === id ? { ...s, ...updates } : s
+              s.id === id ? { ...s, ...updates } : s,
             ),
           }));
         },
@@ -97,7 +84,9 @@ const useCanvasStore = create(
           get().pushToHistory();
           set((state) => ({
             stickers: state.stickers.filter((s) => s.id !== id),
-            selectedStickerIds: state.selectedStickerIds.filter((sid) => sid !== id),
+            selectedStickerIds: state.selectedStickerIds.filter(
+              (sid) => sid !== id,
+            ),
           }));
         },
 
@@ -119,29 +108,29 @@ const useCanvasStore = create(
           }
         },
 
-        // Selection
         setSelectedStickers: (ids) => set({ selectedStickerIds: ids }),
 
-        addToSelection: (id) => set((state) => ({
-          selectedStickerIds: state.selectedStickerIds.includes(id)
-            ? state.selectedStickerIds
-            : [...state.selectedStickerIds, id]
-        })),
+        addToSelection: (id) =>
+          set((state) => ({
+            selectedStickerIds: state.selectedStickerIds.includes(id)
+              ? state.selectedStickerIds
+              : [...state.selectedStickerIds, id],
+          })),
 
         clearSelection: () => set({ selectedStickerIds: [] }),
 
-        selectAll: () => set((state) => ({
-          selectedStickerIds: state.stickers.map((s) => s.id)
-        })),
+        selectAll: () =>
+          set((state) => ({
+            selectedStickerIds: state.stickers.map((s) => s.id),
+          })),
 
-        // Z-Index Management
         bringToFront: (id) => {
           get().pushToHistory();
           set((state) => {
             const maxZ = Math.max(...state.stickers.map((s) => s.zIndex || 0));
             return {
               stickers: state.stickers.map((s) =>
-                s.id === id ? { ...s, zIndex: maxZ + 1 } : s
+                s.id === id ? { ...s, zIndex: maxZ + 1 } : s,
               ),
             };
           });
@@ -153,7 +142,7 @@ const useCanvasStore = create(
             const minZ = Math.min(...state.stickers.map((s) => s.zIndex || 0));
             return {
               stickers: state.stickers.map((s) =>
-                s.id === id ? { ...s, zIndex: minZ - 1 } : s
+                s.id === id ? { ...s, zIndex: minZ - 1 } : s,
               ),
             };
           });
@@ -167,7 +156,7 @@ const useCanvasStore = create(
             const currentZ = sticker.zIndex || 0;
             return {
               stickers: state.stickers.map((s) =>
-                s.id === id ? { ...s, zIndex: currentZ + 1 } : s
+                s.id === id ? { ...s, zIndex: currentZ + 1 } : s,
               ),
             };
           });
@@ -181,22 +170,23 @@ const useCanvasStore = create(
             const currentZ = sticker.zIndex || 0;
             return {
               stickers: state.stickers.map((s) =>
-                s.id === id ? { ...s, zIndex: currentZ - 1 } : s
+                s.id === id ? { ...s, zIndex: currentZ - 1 } : s,
               ),
             };
           });
         },
 
-        // Canvas Controls
         setZoom: (zoom) => set({ zoom: Math.max(0.25, Math.min(4, zoom)) }),
 
-        zoomIn: () => set((state) => ({
-          zoom: Math.min(4, state.zoom + 0.1)
-        })),
+        zoomIn: () =>
+          set((state) => ({
+            zoom: Math.min(4, state.zoom + 0.1),
+          })),
 
-        zoomOut: () => set((state) => ({
-          zoom: Math.max(0.25, state.zoom - 0.1)
-        })),
+        zoomOut: () =>
+          set((state) => ({
+            zoom: Math.max(0.25, state.zoom - 0.1),
+          })),
 
         resetZoom: () => set({ zoom: 1 }),
 
@@ -208,47 +198,50 @@ const useCanvasStore = create(
 
         setActiveTool: (tool) => set({ activeTool: tool }),
 
-        // Panel toggles
-        toggleLaptopSelector: () => set((state) => ({
-          showLaptopSelector: !state.showLaptopSelector,
-          showStickerLibrary: false,
-          showExportPanel: false,
-        })),
+        toggleLaptopSelector: () =>
+          set((state) => ({
+            showLaptopSelector: !state.showLaptopSelector,
+            showStickerLibrary: false,
+            showExportPanel: false,
+          })),
 
-        toggleStickerLibrary: () => set((state) => ({
-          showStickerLibrary: !state.showStickerLibrary,
-          showLaptopSelector: false,
-          showExportPanel: false,
-        })),
+        toggleStickerLibrary: () =>
+          set((state) => ({
+            showStickerLibrary: !state.showStickerLibrary,
+            showLaptopSelector: false,
+            showExportPanel: false,
+          })),
 
-        toggleExportPanel: () => set((state) => ({
-          showExportPanel: !state.showExportPanel,
-          showLaptopSelector: false,
-          showStickerLibrary: false,
-        })),
+        toggleExportPanel: () =>
+          set((state) => ({
+            showExportPanel: !state.showExportPanel,
+            showLaptopSelector: false,
+            showStickerLibrary: false,
+          })),
 
-        closePanels: () => set({
-          showLaptopSelector: false,
-          showStickerLibrary: false,
-          showExportPanel: false,
-        }),
+        closePanels: () =>
+          set({
+            showLaptopSelector: false,
+            showStickerLibrary: false,
+            showExportPanel: false,
+          }),
 
         setShowStickerControls: (show) => set({ showStickerControls: show }),
 
-        // Processing
-        addToProcessingQueue: (id) => set((state) => ({
-          processingQueue: [...state.processingQueue, id]
-        })),
+        addToProcessingQueue: (id) =>
+          set((state) => ({
+            processingQueue: [...state.processingQueue, id],
+          })),
 
-        removeFromProcessingQueue: (id) => set((state) => ({
-          processingQueue: state.processingQueue.filter((pid) => pid !== id)
-        })),
+        removeFromProcessingQueue: (id) =>
+          set((state) => ({
+            processingQueue: state.processingQueue.filter((pid) => pid !== id),
+          })),
 
-        // Notifications
         addNotification: (notification) => {
           const id = crypto.randomUUID();
           set((state) => ({
-            notifications: [...state.notifications, { ...notification, id }]
+            notifications: [...state.notifications, { ...notification, id }],
           }));
           if (notification.duration !== 0) {
             setTimeout(() => {
@@ -258,18 +251,17 @@ const useCanvasStore = create(
           return id;
         },
 
-        removeNotification: (id) => set((state) => ({
-          notifications: state.notifications.filter((n) => n.id !== id)
-        })),
+        removeNotification: (id) =>
+          set((state) => ({
+            notifications: state.notifications.filter((n) => n.id !== id),
+          })),
 
-        // Randomize positions
         randomizeLayout: () => {
-          const { stickers, laptop } = get();
+          const { stickers } = get();
           if (stickers.length === 0) return;
 
           get().pushToHistory();
 
-          // Define safe zone (laptop surface bounds - approximate)
           const safeZone = {
             minX: 100,
             maxX: 700,
@@ -278,10 +270,12 @@ const useCanvasStore = create(
           };
 
           const newStickers = stickers.map((sticker) => {
-            const randomX = safeZone.minX + Math.random() * (safeZone.maxX - safeZone.minX);
-            const randomY = safeZone.minY + Math.random() * (safeZone.maxY - safeZone.minY);
-            const randomAngle = (Math.random() - 0.5) * 30; // -15 to +15 degrees
-            const randomScale = 0.8 + Math.random() * 0.4; // 80% to 120%
+            const randomX =
+              safeZone.minX + Math.random() * (safeZone.maxX - safeZone.minX);
+            const randomY =
+              safeZone.minY + Math.random() * (safeZone.maxY - safeZone.minY);
+            const randomAngle = (Math.random() - 0.5) * 30;
+            const randomScale = 0.8 + Math.random() * 0.4;
 
             return {
               ...sticker,
@@ -296,7 +290,6 @@ const useCanvasStore = create(
           set({ stickers: newStickers });
         },
 
-        // History management
         pushToHistory: () => {
           const { stickers, history, historyIndex, maxHistory } = get();
           const newHistory = history.slice(0, historyIndex + 1);
@@ -310,9 +303,11 @@ const useCanvasStore = create(
         undo: () => {
           const { history, historyIndex, stickers } = get();
           if (historyIndex >= 0) {
-            // Save current state first if we're at the end
             if (historyIndex === history.length - 1) {
-              const newHistory = [...history, JSON.parse(JSON.stringify(stickers))];
+              const newHistory = [
+                ...history,
+                JSON.parse(JSON.stringify(stickers)),
+              ];
               set({
                 stickers: history[historyIndex],
                 history: newHistory,
@@ -350,7 +345,6 @@ const useCanvasStore = create(
           return historyIndex < history.length - 1;
         },
 
-        // Reset
         resetCanvas: () => {
           get().pushToHistory();
           set({
@@ -361,28 +355,29 @@ const useCanvasStore = create(
           });
         },
 
-        // Delete selected
         deleteSelected: () => {
           const { selectedStickerIds } = get();
           if (selectedStickerIds.length > 0) {
             get().pushToHistory();
             set((state) => ({
-              stickers: state.stickers.filter((s) => !selectedStickerIds.includes(s.id)),
+              stickers: state.stickers.filter(
+                (s) => !selectedStickerIds.includes(s.id),
+              ),
               selectedStickerIds: [],
             }));
           }
         },
       }),
       {
-        name: 'stickercanvas-storage',
+        name: "stickercanvas-storage",
         partialize: (state) => ({
           laptop: state.laptop,
           stickers: state.stickers,
           stickerLibrary: state.stickerLibrary,
         }),
-      }
-    )
-  )
+      },
+    ),
+  ),
 );
 
 export default useCanvasStore;

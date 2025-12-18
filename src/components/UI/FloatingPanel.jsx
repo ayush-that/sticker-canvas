@@ -1,19 +1,18 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import { X } from "lucide-react";
 
 export default function FloatingPanel({
   title,
   children,
   onClose,
-  position = 'bottom-right',
+  position = "bottom-right",
   width = 320,
-  className = '',
+  className = "",
 }) {
   const positionClasses = {
-    'bottom-right': 'right-6 bottom-6',
-    'bottom-left': 'left-24 bottom-6',
-    'top-right': 'right-6 top-20',
-    'center': 'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+    "bottom-right": "right-6 bottom-6",
+    "bottom-left": "left-24 bottom-6",
+    "top-right": "right-6 top-20",
+    center: "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
   };
 
   return (
@@ -40,9 +39,7 @@ export default function FloatingPanel({
           )}
         </header>
       )}
-      <div className="p-3 max-h-[400px] overflow-y-auto">
-        {children}
-      </div>
+      <div className="p-3 max-h-[400px] overflow-y-auto">{children}</div>
     </div>
   );
 }

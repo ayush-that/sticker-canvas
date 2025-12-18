@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from "react";
 import {
   Plus,
   Image,
@@ -9,9 +9,9 @@ import {
   Redo2,
   RotateCcw,
   Settings,
-} from 'lucide-react';
-import ToolButton from './ToolButton';
-import useCanvasStore from '../../store/canvasStore';
+} from "lucide-react";
+import ToolButton from "./ToolButton";
+import useCanvasStore from "../../store/canvasStore";
 
 export default function ToolRail() {
   const fileInputRef = useRef(null);
@@ -41,10 +41,10 @@ export default function ToolRail() {
     if (files.length === 0) return;
 
     for (const file of files) {
-      if (!file.type.startsWith('image/')) {
+      if (!file.type.startsWith("image/")) {
         addNotification({
           message: `${file.name} is not an image`,
-          type: 'error',
+          type: "error",
         });
         continue;
       }
@@ -52,7 +52,7 @@ export default function ToolRail() {
       if (file.size > 5 * 1024 * 1024) {
         addNotification({
           message: `${file.name} is too large (max 5MB)`,
-          type: 'error',
+          type: "error",
         });
         continue;
       }
@@ -70,16 +70,14 @@ export default function ToolRail() {
         addToLibrary(sticker);
         addNotification({
           message: `Added ${file.name} to library`,
-          type: 'success',
+          type: "success",
         });
       };
       reader.readAsDataURL(file);
     }
 
-    // Reset input
-    e.target.value = '';
+    e.target.value = "";
 
-    // Show library panel
     if (!showStickerLibrary) {
       toggleStickerLibrary();
     }
@@ -93,7 +91,6 @@ export default function ToolRail() {
         rounded-[32px] glass-surface
       "
     >
-      {/* Hidden file input */}
       <input
         ref={fileInputRef}
         type="file"
@@ -103,7 +100,6 @@ export default function ToolRail() {
         className="hidden"
       />
 
-      {/* Primary Action - Add Sticker */}
       <button
         onClick={handleAddSticker}
         className="
@@ -119,10 +115,8 @@ export default function ToolRail() {
         <Plus size={22} strokeWidth={2.5} />
       </button>
 
-      {/* Divider */}
       <div className="w-8 h-px bg-border-medium my-1" />
 
-      {/* Tool Buttons */}
       <nav className="flex flex-col gap-1">
         <ToolButton
           icon={Image}
@@ -152,21 +146,10 @@ export default function ToolRail() {
           active={showGrid}
         />
 
-        {/* Divider */}
         <div className="w-8 h-px bg-border-medium my-1 self-center" />
 
-        <ToolButton
-          icon={Undo2}
-          label="Undo"
-          shortcut="⌘Z"
-          onClick={undo}
-        />
-        <ToolButton
-          icon={Redo2}
-          label="Redo"
-          shortcut="⌘⇧Z"
-          onClick={redo}
-        />
+        <ToolButton icon={Undo2} label="Undo" shortcut="⌘Z" onClick={undo} />
+        <ToolButton icon={Redo2} label="Redo" shortcut="⌘⇧Z" onClick={redo} />
         <ToolButton
           icon={RotateCcw}
           label="Reset Canvas"
@@ -175,14 +158,14 @@ export default function ToolRail() {
         />
       </nav>
 
-      {/* Spacer */}
       <div className="flex-grow min-h-4" />
 
-      {/* Settings (placeholder) */}
       <ToolButton
         icon={Settings}
         label="Settings"
-        onClick={() => addNotification({ message: 'Settings coming soon', type: 'info' })}
+        onClick={() =>
+          addNotification({ message: "Settings coming soon", type: "info" })
+        }
       />
     </aside>
   );

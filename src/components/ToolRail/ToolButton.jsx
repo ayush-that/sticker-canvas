@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function ToolButton({
   icon: Icon,
   label,
@@ -18,17 +16,17 @@ export default function ToolButton({
         transition-all duration-fast
         disabled:opacity-50 disabled:cursor-not-allowed
         group relative
-        ${active
-          ? 'bg-accent/15 text-accent'
-          : 'bg-transparent text-[#d0d0d0] hover:bg-surface-hover hover:text-white'
+        ${
+          active
+            ? "bg-accent/15 text-accent"
+            : "bg-transparent text-[#d0d0d0] hover:bg-surface-hover hover:text-white"
         }
       `}
-      title={`${label}${shortcut ? ` (${shortcut})` : ''}`}
+      title={`${label}${shortcut ? ` (${shortcut})` : ""}`}
       aria-label={label}
     >
       <Icon size={20} />
 
-      {/* Tooltip */}
       <div
         className="
           absolute left-full ml-3 px-2 py-1.5 rounded-md

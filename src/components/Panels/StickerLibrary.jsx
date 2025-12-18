@@ -1,8 +1,7 @@
-import React from 'react';
-import { Trash2, Wand2, RotateCcw, Loader2, Plus } from 'lucide-react';
-import FloatingPanel from '../UI/FloatingPanel';
-import useCanvasStore from '../../store/canvasStore';
-import useBackgroundRemoval from '../../hooks/useBackgroundRemoval';
+import { Trash2, Wand2, RotateCcw, Loader2, Plus } from "lucide-react";
+import FloatingPanel from "../UI/FloatingPanel";
+import useCanvasStore from "../../store/canvasStore";
+import useBackgroundRemoval from "../../hooks/useBackgroundRemoval";
 
 export default function StickerLibrary() {
   const {
@@ -15,7 +14,7 @@ export default function StickerLibrary() {
     addNotification,
   } = useCanvasStore();
 
-  const { processImage, status: bgStatus } = useBackgroundRemoval();
+  const { processImage } = useBackgroundRemoval();
 
   const handleAddToCanvas = (librarySticker) => {
     const newSticker = {
@@ -37,8 +36,8 @@ export default function StickerLibrary() {
     };
     addSticker(newSticker);
     addNotification({
-      message: 'Sticker added to canvas',
-      type: 'success',
+      message: "Sticker added to canvas",
+      type: "success",
     });
   };
 
@@ -47,8 +46,8 @@ export default function StickerLibrary() {
 
     updateLibrarySticker(sticker.id, { processing: true });
     addNotification({
-      message: 'Removing background...',
-      type: 'info',
+      message: "Removing background...",
+      type: "info",
       duration: 0,
     });
 
@@ -62,15 +61,15 @@ export default function StickerLibrary() {
           processing: false,
         });
         addNotification({
-          message: 'Background removed successfully',
-          type: 'success',
+          message: "Background removed successfully",
+          type: "success",
         });
       }
     } catch (error) {
       updateLibrarySticker(sticker.id, { processing: false });
       addNotification({
-        message: 'Failed to remove background',
-        type: 'error',
+        message: "Failed to remove background",
+        type: "error",
       });
     }
   };
@@ -81,16 +80,16 @@ export default function StickerLibrary() {
       bgRemoved: false,
     });
     addNotification({
-      message: 'Reverted to original',
-      type: 'info',
+      message: "Reverted to original",
+      type: "info",
     });
   };
 
   const handleDelete = (sticker) => {
     removeFromLibrary(sticker.id);
     addNotification({
-      message: 'Sticker removed from library',
-      type: 'info',
+      message: "Sticker removed from library",
+      type: "info",
     });
   };
 
@@ -113,7 +112,6 @@ export default function StickerLibrary() {
               key={sticker.id}
               className="group relative aspect-square rounded-md bg-surface border border-border-subtle overflow-hidden"
             >
-              {/* Sticker Image */}
               <button
                 onClick={() => handleAddToCanvas(sticker)}
                 className="w-full h-full p-2 hover:bg-surface-hover transition-colors duration-fast"
@@ -126,21 +124,18 @@ export default function StickerLibrary() {
                 />
               </button>
 
-              {/* Processing Overlay */}
               {sticker.processing && (
                 <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
                   <Loader2 size={20} className="text-accent animate-spin" />
                 </div>
               )}
 
-              {/* Add to canvas indicator */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                 <div className="w-8 h-8 rounded-full bg-accent/80 flex items-center justify-center">
                   <Plus size={16} className="text-text-inverse" />
                 </div>
               </div>
 
-              {/* Action buttons - shown on hover */}
               <div className="absolute bottom-0 left-0 right-0 p-1 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-black/80 to-transparent">
                 {!sticker.bgRemoved ? (
                   <button
@@ -178,7 +173,6 @@ export default function StickerLibrary() {
                 </button>
               </div>
 
-              {/* BG Removed Badge */}
               {sticker.bgRemoved && !sticker.processing && (
                 <div className="absolute top-1 right-1 px-1 py-0.5 rounded text-[10px] bg-accent/20 text-accent">
                   BG

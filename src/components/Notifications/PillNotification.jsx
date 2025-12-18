@@ -1,29 +1,28 @@
-import React from 'react';
-import { X, CheckCircle, AlertCircle, Info, Loader2 } from 'lucide-react';
+import { X, CheckCircle, AlertCircle, Info, Loader2 } from "lucide-react";
 
 const typeStyles = {
   success: {
     icon: CheckCircle,
-    color: 'text-accent',
+    color: "text-accent",
   },
   error: {
     icon: AlertCircle,
-    color: 'text-red-400',
+    color: "text-red-400",
   },
   info: {
     icon: Info,
-    color: 'text-blue-400',
+    color: "text-blue-400",
   },
   loading: {
     icon: Loader2,
-    color: 'text-accent',
+    color: "text-accent",
     animate: true,
   },
 };
 
 export default function PillNotification({
   message,
-  type = 'info',
+  type = "info",
   cta,
   onCtaClick,
   onDismiss,
@@ -41,7 +40,7 @@ export default function PillNotification({
     >
       <Icon
         size={18}
-        className={`${color} ${animate ? 'animate-spin' : ''} flex-shrink-0`}
+        className={`${color} ${animate ? "animate-spin" : ""} flex-shrink-0`}
       />
       <span className="text-sm text-text-primary flex-grow">{message}</span>
 

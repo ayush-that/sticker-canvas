@@ -25,39 +25,39 @@ A zero-friction, no-signup web application that allows users to visualize laptop
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm dev
 
 # Build for production
-npm run build
+pnpm build
 
 # Preview production build
-npm run preview
+pnpm run preview
 ```
 
 ## Keyboard Shortcuts
 
-| Shortcut | Action |
-|----------|--------|
-| `S` | Add sticker |
-| `L` | Change laptop |
-| `R` | Randomize layout |
-| `G` | Toggle snap |
-| `Shift+G` | Toggle grid |
-| `Delete/Backspace` | Delete selected |
-| `Ctrl+D` | Duplicate selected |
-| `Ctrl+Z` | Undo |
-| `Ctrl+Shift+Z` | Redo |
-| `Ctrl+A` | Select all |
-| `Escape` | Deselect |
-| `[` / `]` | Send backward/forward |
-| `Shift+[` / `Shift+]` | Send to back/front |
-| `+` / `-` | Zoom in/out |
-| `0` | Reset zoom |
-| `Arrow keys` | Nudge (1px) |
-| `Shift+Arrow` | Nudge (10px) |
+| Shortcut              | Action                |
+| --------------------- | --------------------- |
+| `S`                   | Add sticker           |
+| `L`                   | Change laptop         |
+| `R`                   | Randomize layout      |
+| `G`                   | Toggle snap           |
+| `Shift+G`             | Toggle grid           |
+| `Delete/Backspace`    | Delete selected       |
+| `Ctrl+D`              | Duplicate selected    |
+| `Ctrl+Z`              | Undo                  |
+| `Ctrl+Shift+Z`        | Redo                  |
+| `Ctrl+A`              | Select all            |
+| `Escape`              | Deselect              |
+| `[` / `]`             | Send backward/forward |
+| `Shift+[` / `Shift+]` | Send to back/front    |
+| `+` / `-`             | Zoom in/out           |
+| `0`                   | Reset zoom            |
+| `Arrow keys`          | Nudge (1px)           |
+| `Shift+Arrow`         | Nudge (10px)          |
 
 ## Project Structure
 

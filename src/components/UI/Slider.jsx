@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Slider({
   label,
   value,
@@ -7,9 +5,9 @@ export default function Slider({
   min = 0,
   max = 100,
   step = 1,
-  unit = '',
+  unit = "",
   showValue = true,
-  className = '',
+  className = "",
 }) {
   const percentage = ((value - min) / (max - min)) * 100;
 
@@ -20,7 +18,8 @@ export default function Slider({
           {label && <span className="text-text-secondary">{label}</span>}
           {showValue && (
             <span className="text-text-muted font-mono text-xs">
-              {Math.round(value)}{unit}
+              {Math.round(value)}
+              {unit}
             </span>
           )}
         </div>
@@ -53,7 +52,7 @@ export default function Slider({
             [&::-moz-range-thumb]:cursor-pointer
           "
           style={{
-            background: `linear-gradient(to right, var(--accent-primary) 0%, var(--accent-primary) ${percentage}%, rgba(255,255,255,0.08) ${percentage}%, rgba(255,255,255,0.08) 100%)`
+            background: `linear-gradient(to right, var(--accent-primary) 0%, var(--accent-primary) ${percentage}%, rgba(255,255,255,0.08) ${percentage}%, rgba(255,255,255,0.08) 100%)`,
           }}
         />
       </div>

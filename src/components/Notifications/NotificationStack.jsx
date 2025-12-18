@@ -1,6 +1,5 @@
-import React from 'react';
-import PillNotification from './PillNotification';
-import useCanvasStore from '../../store/canvasStore';
+import PillNotification from "./PillNotification";
+import useCanvasStore from "../../store/canvasStore";
 
 export default function NotificationStack() {
   const { notifications, removeNotification } = useCanvasStore();

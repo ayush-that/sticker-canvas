@@ -1,6 +1,5 @@
-import React from 'react';
-import { ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
-import useCanvasStore from '../../store/canvasStore';
+import { ZoomIn, ZoomOut, Maximize2 } from "lucide-react";
+import useCanvasStore from "../../store/canvasStore";
 
 export default function CanvasControls() {
   const { zoom, zoomIn, zoomOut, resetZoom } = useCanvasStore();

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Trash2,
   Copy,
@@ -10,10 +9,10 @@ import {
   ChevronDown,
   ChevronsUp,
   ChevronsDown,
-} from 'lucide-react';
-import FloatingPanel from '../UI/FloatingPanel';
-import Slider from '../UI/Slider';
-import useCanvasStore from '../../store/canvasStore';
+} from "lucide-react";
+import FloatingPanel from "../UI/FloatingPanel";
+import Slider from "../UI/Slider";
+import useCanvasStore from "../../store/canvasStore";
 
 export default function StickerControls() {
   const {
@@ -29,7 +28,9 @@ export default function StickerControls() {
     setShowStickerControls,
   } = useCanvasStore();
 
-  const selectedSticker = stickers.find((s) => selectedStickerIds.includes(s.id));
+  const selectedSticker = stickers.find((s) =>
+    selectedStickerIds.includes(s.id),
+  );
 
   if (!selectedSticker) return null;
 
@@ -50,18 +51,26 @@ export default function StickerControls() {
   };
 
   const handleFlipX = () => {
-    updateStickerWithHistory(selectedSticker.id, { flipX: !selectedSticker.flipX });
+    updateStickerWithHistory(selectedSticker.id, {
+      flipX: !selectedSticker.flipX,
+    });
   };
 
   const handleFlipY = () => {
-    updateStickerWithHistory(selectedSticker.id, { flipY: !selectedSticker.flipY });
+    updateStickerWithHistory(selectedSticker.id, {
+      flipY: !selectedSticker.flipY,
+    });
   };
 
   const handleToggleLock = () => {
-    updateStickerWithHistory(selectedSticker.id, { locked: !selectedSticker.locked });
+    updateStickerWithHistory(selectedSticker.id, {
+      locked: !selectedSticker.locked,
+    });
   };
 
-  const currentScale = Math.round(((selectedSticker.scaleX || 1) + (selectedSticker.scaleY || 1)) / 2 * 100);
+  const currentScale = Math.round(
+    (((selectedSticker.scaleX || 1) + (selectedSticker.scaleY || 1)) / 2) * 100,
+  );
 
   return (
     <FloatingPanel
@@ -108,9 +117,10 @@ export default function StickerControls() {
             className={`
               flex-1 flex items-center justify-center gap-2 p-2 rounded-md
               text-sm border transition-colors duration-fast
-              ${selectedSticker.flipX
-                ? 'border-accent text-accent bg-accent/10'
-                : 'border-border-subtle text-text-secondary hover:bg-surface-hover hover:text-white'
+              ${
+                selectedSticker.flipX
+                  ? "border-accent text-accent bg-accent/10"
+                  : "border-border-subtle text-text-secondary hover:bg-surface-hover hover:text-white"
               }
             `}
           >
@@ -122,9 +132,10 @@ export default function StickerControls() {
             className={`
               flex-1 flex items-center justify-center gap-2 p-2 rounded-md
               text-sm border transition-colors duration-fast
-              ${selectedSticker.flipY
-                ? 'border-accent text-accent bg-accent/10'
-                : 'border-border-subtle text-text-secondary hover:bg-surface-hover hover:text-white'
+              ${
+                selectedSticker.flipY
+                  ? "border-accent text-accent bg-accent/10"
+                  : "border-border-subtle text-text-secondary hover:bg-surface-hover hover:text-white"
               }
             `}
           >
@@ -175,14 +186,15 @@ export default function StickerControls() {
             className={`
               flex-1 flex items-center justify-center gap-2 p-2 rounded-md
               text-sm transition-colors duration-fast
-              ${selectedSticker.locked
-                ? 'bg-accent/20 text-accent'
-                : 'bg-surface text-text-secondary hover:bg-surface-hover hover:text-white'
+              ${
+                selectedSticker.locked
+                  ? "bg-accent/20 text-accent"
+                  : "bg-surface text-text-secondary hover:bg-surface-hover hover:text-white"
               }
             `}
           >
             {selectedSticker.locked ? <Lock size={16} /> : <Unlock size={16} />}
-            <span>{selectedSticker.locked ? 'Locked' : 'Lock'}</span>
+            <span>{selectedSticker.locked ? "Locked" : "Lock"}</span>
           </button>
           <button
             onClick={() => duplicateSticker(selectedSticker.id)}

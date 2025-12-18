@@ -16,7 +16,7 @@
   --text-inverse: #023000;
 
   /* Accent */
-  --accent-primary: #89D888;
+  --accent-primary: #89d888;
   --accent-primary-hover: #9de89c;
   --accent-glow: rgba(137, 216, 136, 0.3);
 
@@ -28,9 +28,9 @@
   --shadow-glow: 0 0 20px var(--accent-glow);
 
   /* Typography */
-  --font-display: 'Outfit', 'SF Pro Display', sans-serif;
-  --font-body: 'Inter', 'SF Pro Text', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: "Outfit", "SF Pro Display", sans-serif;
+  --font-body: "Inter", "SF Pro Text", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   /* Animation */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -46,7 +46,9 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -146,7 +148,8 @@ button {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
